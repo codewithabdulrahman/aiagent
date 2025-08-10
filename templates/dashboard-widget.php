@@ -58,6 +58,10 @@ $security_alerts = $wpdb->get_var(
             <span class="dashicons dashicons-update"></span>
             <?php _e('Refresh', 'wp-ai-site-manager'); ?>
         </button>
+        <button type="button" class="button button-warning button-small" id="clear-cron-jobs">
+            <span class="dashicons dashicons-clock"></span>
+            <?php _e('Fix Cron Jobs', 'wp-ai-site-manager'); ?>
+        </button>
     </div>
     
     <!-- Recent Activity -->
@@ -227,6 +231,45 @@ jQuery(document).ready(function($) {
         });
     });
     
+    // Fix Cron Jobs functionality
+    $('#clear-cron-jobs').on('click', function() {
+        var $button = $(this);
+        var $icon = $button.find('.dashicons');
+        
+        if (!confirm('<?php _e('This will clear any excessive cron jobs that might be causing the infinite email loop. Continue?', 'wp-ai-site-manager'); ?>')) {
+            return;
+        }
+        
+        // Add loading state
+        $button.prop('disabled', true);
+        $icon.addClass('wp-aism-spinning');
+        
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+                action: 'wp_aism_clear_cron_jobs',
+                nonce: wpAISM.nonce
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert('<?php _e('Cron jobs cleared successfully! The infinite email loop should now be resolved.', 'wp-ai-site-manager'); ?>');
+                    location.reload();
+                } else {
+                    alert('<?php _e('Error clearing cron jobs. Please try again.', 'wp-ai-site-manager'); ?>');
+                }
+            },
+            error: function() {
+                alert('<?php _e('Error clearing cron jobs. Please try again.', 'wp-ai-site-manager'); ?>');
+            },
+            complete: function() {
+                // Remove loading state
+                $button.prop('disabled', false);
+                $icon.removeClass('wp-aism-spinning');
+            }
+        });
+    });
+    
     // Auto-refresh every 5 minutes
     setInterval(function() {
         if ($('#wp_aism_dashboard_widget').is(':visible')) {
@@ -284,6 +327,17 @@ jQuery(document).ready(function($) {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.wp-aism-quick-actions .button-warning {
+    background: #ffb900;
+    border-color: #ffb900;
+    color: #23282d;
+}
+
+.wp-aism-quick-actions .button-warning:hover {
+    background: #f7a700;
+    border-color: #f7a700;
 }
 
 .wp-aism-recent-activity {

@@ -1,0 +1,489 @@
+/**
+ * Pricing Page and Upgrade Prompts Styles
+ * 
+ * @package WP_AI_Site_Manager
+ * @since 1.0.0
+ */
+
+/* Pricing Page Styles */
+.wp-aism-pricing-page {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wp-aism-trial-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.trial-content h2 {
+    margin: 0 0 15px 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.trial-content p {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.wp-aism-pricing-intro {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.wp-aism-pricing-intro h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #23282d;
+}
+
+.wp-aism-pricing-intro p {
+    font-size: 18px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Pricing Grid */
+.wp-aism-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.pricing-plan {
+    background: white;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.pricing-plan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-color: #0073aa;
+}
+
+.pricing-plan.featured {
+    border-color: #0073aa;
+    border-width: 3px;
+    transform: scale(1.05);
+}
+
+.pricing-plan.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.plan-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0073aa;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.plan-header h3 {
+    font-size: 24px;
+    margin: 0 0 15px 0;
+    color: #23282d;
+}
+
+.plan-price {
+    margin-bottom: 15px;
+}
+
+.plan-price .price {
+    font-size: 48px;
+    font-weight: 700;
+    color: #0073aa;
+    line-height: 1;
+}
+
+.plan-price .period {
+    font-size: 16px;
+    color: #666;
+    margin-left: 5px;
+}
+
+.plan-description {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.plan-features {
+    margin-bottom: 25px;
+}
+
+.plan-features ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.plan-features li {
+    padding: 8px 0;
+    color: #444;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.plan-features li:last-child {
+    border-bottom: none;
+}
+
+.plan-action {
+    text-align: center;
+}
+
+.current-plan-badge {
+    display: inline-block;
+    background: #46b450;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Feature Comparison Table */
+.wp-aism-feature-comparison {
+    margin: 60px 0;
+}
+
+.wp-aism-feature-comparison h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #23282d;
+}
+
+.comparison-table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.wp-aism-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.wp-aism-comparison-table th,
+.wp-aism-comparison-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.wp-aism-comparison-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #23282d;
+    font-size: 14px;
+}
+
+.wp-aism-comparison-table th:first-child,
+.wp-aism-comparison-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    background: #f8f9fa;
+}
+
+.wp-aism-comparison-table .feature-name {
+    color: #23282d;
+    font-size: 14px;
+}
+
+/* FAQ Section */
+.wp-aism-faq-section {
+    margin: 60px 0;
+}
+
+.wp-aism-faq-section h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 40px;
+    color: #23282d;
+}
+
+.faq-item {
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item h3 {
+    margin: 0 0 15px 0;
+    color: #0073aa;
+    font-size: 18px;
+}
+
+.faq-item p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Call to Action Section */
+.wp-aism-cta-section {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 60px 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 60px 0;
+}
+
+.cta-content h2 {
+    font-size: 32px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+}
+
+.cta-content p {
+    font-size: 18px;
+    margin: 0 0 30px 0;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .button {
+    min-width: 180px;
+}
+
+/* Upgrade Prompts Styles */
+.wp-aism-upgrade-prompt {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.upgrade-prompt-content h3 {
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.upgrade-prompt-content p {
+    margin: 0 0 20px 0;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.upgrade-features,
+.upgrade-benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.upgrade-features .feature,
+.upgrade-benefits .benefit {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.upgrade-prompt-content .button {
+    background: white;
+    color: #667eea;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.upgrade-prompt-content .button:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wp-aism-pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .pricing-plan.featured {
+        transform: none;
+    }
+    
+    .pricing-plan.featured:hover {
+        transform: translateY(-5px);
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .upgrade-features,
+    .upgrade-benefits {
+        flex-direction: column;
+    }
+    
+    .upgrade-features .feature,
+    .upgrade-benefits .benefit {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .wp-aism-pricing-page {
+        padding: 0 15px;
+    }
+    
+    .pricing-plan {
+        padding: 20px;
+    }
+    
+    .plan-price .price {
+        font-size: 36px;
+    }
+    
+    .wp-aism-trial-banner {
+        padding: 20px;
+    }
+    
+    .wp-aism-cta-section {
+        padding: 40px 20px;
+    }
+}
+
+/* Admin Notice Styles */
+.wp-aism-upgrade-notice {
+    border-left-color: #0073aa;
+}
+
+.wp-aism-upgrade-notice .button {
+    margin-left: 10px;
+}
+
+.wp-aism-trial-notice {
+    border-left-color: #ff6b6b;
+}
+
+.wp-aism-trial-notice.notice-error {
+    border-left-color: #dc3232;
+}
+
+.wp-aism-trial-notice.notice-warning {
+    border-left-color: #ffb900;
+}
+
+.wp-aism-trial-notice.notice-info {
+    border-left-color: #00a0d2;
+}
+
+/* Animation for upgrade prompts */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wp-aism-upgrade-prompt {
+    animation: slideInUp 0.5s ease-out;
+}
+
+/* Hover effects for pricing plans */
+.pricing-plan:hover .plan-header h3 {
+    color: #0073aa;
+}
+
+.pricing-plan:hover .plan-price .price {
+    color: #005a87;
+}
+
+/* Special styling for free plan */
+.pricing-plan.free-plan {
+    background: #f8f9fa;
+}
+
+.pricing-plan.free-plan .plan-price .price {
+    color: #666;
+}
+
+/* Special styling for enterprise plan */
+.pricing-plan.enterprise-plan {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+}
+
+.pricing-plan.enterprise-plan .plan-header h3,
+.pricing-plan.enterprise-plan .plan-price .price,
+.pricing-plan.enterprise-plan .plan-description,
+.pricing-plan.enterprise-plan .plan-features li {
+    color: white;
+}
+
+.pricing-plan.enterprise-plan .plan-features li {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.pricing-plan.enterprise-plan .button {
+    background: #e74c3c;
+    color: white;
+}
+
+.pricing-plan.enterprise-plan .button:hover {
+    background: #c0392b;
+}

@@ -1,0 +1,41 @@
+# Copyright (C) 2024 WP AI Site Manager
+# This file is distributed under the same license as the WP AI Site Manager package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP AI Site Manager 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-ai-site-manager\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/class-wp-ai-site-manager.php:67
+msgid "AI Site Manager"
+msgstr ""
+
+#: includes/class-wp-ai-site-manager.php:68
+msgid "Settings"
+msgstr ""
+
+#: includes/class-wp-ai-site-manager.php:75
+msgid "Activity Logs"
+msgstr ""
+
+#: includes/class-wp-ai-site-manager.php:82
+msgid "AI Tools"
+msgstr ""
+
+#: includes/class-wp-ai-site-manager.php:89
+msgid "AI Site Manager - Recent Activity"
+msgstr ""
+
+#: includes/class-wp-ai-site-manager.php:120
+msgid "Loading..."
+msgstr ""
+
+#: includes/class-wp-ai-site-manager.php:121
+msgid "An error occurred"
+msgstr ""
