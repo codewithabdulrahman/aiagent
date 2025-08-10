@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {
                 <div class="wp-aism-stat-card">
                     <h3><?php _e('Daily Limit', 'wp-ai-site-manager'); ?></h3>
                     <p class="stat-number"><?php echo esc_html($usage['limit']); ?></p>
-                    <p class="stat-label"><?php _e('Remaining', 'wp-ai-site-manager'); ?></p>
+                    <p class="stat-label"><?php _e('Requests', 'wp-ai-site-manager'); ?></p>
                 </div>
             </div>
         </div>

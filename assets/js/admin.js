@@ -157,22 +157,21 @@
             
             $list.empty();
             
-            activities.forEach(function(activity) {
-                var severityClass = 'wp-aism-severity-' + activity.severity;
+            for (var i = 0; i < activities.length; i++) {
+                var activity = activities[i];
+                var severityClass = 'wp-aism-activity-severity-' + activity.severity;
                 var timeAgo = WPAISM.timeAgo(activity.timestamp);
                 
-                var item = `
-                    <li class="wp-aism-activity-item">
-                        <div class="wp-aism-activity-details">
-                            <div class="wp-aism-activity-action">${activity.action_type}</div>
-                            <div class="wp-aism-activity-time">${timeAgo}</div>
-                        </div>
-                        <span class="wp-aism-activity-severity ${severityClass}">${activity.severity}</span>
-                    </li>
-                `;
+                var item = '<li class="wp-aism-activity-item">' +
+                    '<div class="wp-aism-activity-details">' +
+                        '<div class="wp-aism-activity-action">' + activity.action_type + '</div>' +
+                        '<div class="wp-aism-activity-time">' + timeAgo + '</div>' +
+                    '</div>' +
+                    '<span class="wp-aism-activity-severity ' + severityClass + '">' + activity.severity + '</span>' +
+                '</li>';
                 
                 $list.append(item);
-            });
+            }
         },
         
         updateUsageStats: function(stats) {
@@ -185,15 +184,15 @@
                     $stat.text(stats.today);
                 } else if (statType.includes('month') && stats.month !== undefined) {
                     $stat.text(stats.month);
-                } else if (statType.includes('limit') && stats.remaining !== undefined) {
-                    $stat.text(stats.remaining);
+                } else if (statType.includes('limit') && stats.limit !== undefined) {
+                    $stat.text(stats.limit);
                 }
             });
             
             // Update usage chart if available
-            if (WPAISM.usageChart && stats.used !== undefined && stats.limit !== undefined) {
-                var used = stats.used;
-                var remaining = stats.limit - stats.used;
+            if (WPAISM.usageChart && stats.today !== undefined && stats.limit !== undefined) {
+                var used = stats.today;
+                var remaining = stats.limit - stats.today;
                 
                 WPAISM.usageChart.data.datasets[0].data = [used, remaining];
                 WPAISM.usageChart.update();
@@ -524,7 +523,7 @@
             if (diff < 2592000) return Math.floor(diff / 86400) + ' days ago';
             
             return past.toLocaleDateString();
-        }
+        },
         
     };
     
@@ -539,14 +538,15 @@
 })(jQuery);
 
 // Additional utility functions
-function wpAISMFormatBytes(bytes, decimals = 2) {
+function wpAISMFormatBytes(bytes, decimals) {
+    if (typeof decimals === 'undefined') decimals = 2;
     if (bytes === 0) return '0 Bytes';
     
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    var k = 1024;
+    var dm = decimals < 0 ? 0 : decimals;
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    var i = Math.floor(Math.log(bytes) / Math.log(k));
     
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }

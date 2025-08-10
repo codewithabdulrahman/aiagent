@@ -221,8 +221,8 @@ class WP_AI_Site_Manager_AI {
         $user_role = $this->get_user_role();
         $daily_limit = isset($limits[$user_role]) ? $limits[$user_role] : 25;
         
-        $today_usage = $this->get_user_usage();
-        return $today_usage < $daily_limit;
+        $usage = $this->get_user_usage();
+        return $usage['today'] < $daily_limit;
     }
     
     private function get_user_role() {
@@ -236,20 +236,58 @@ class WP_AI_Site_Manager_AI {
         
         $user_id = get_current_user_id();
         $today = current_time('Y-m-d');
+        $month_start = current_time('Y-m-01');
         
-        $usage = $wpdb->get_var($wpdb->prepare(
+        // Check if table exists, if not return default values
+        if ($wpdb->get_var("SHOW TABLES LIKE '{$this->usage_table}'") != $this->usage_table) {
+            $options = get_option('wp_aism_options', array());
+            $limits = isset($options['ai_usage_limits']) ? $options['ai_usage_limits'] : array();
+            $user_role = $this->get_user_role();
+            $daily_limit = isset($limits[$user_role]) ? $limits[$user_role] : 25;
+            
+            return array(
+                'today' => 0,
+                'month' => 0,
+                'limit' => intval($daily_limit)
+            );
+        }
+        
+        // Get today's usage
+        $today_usage = $wpdb->get_var($wpdb->prepare(
             "SELECT COUNT(*) FROM {$this->usage_table} WHERE user_id = %d AND DATE(timestamp) = %s",
             $user_id,
             $today
         ));
         
-        return intval($usage);
+        // Get this month's usage
+        $month_usage = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$this->usage_table} WHERE user_id = %d AND DATE(timestamp) >= %s",
+            $user_id,
+            $month_start
+        ));
+        
+        // Get user's daily limit
+        $options = get_option('wp_aism_options', array());
+        $limits = isset($options['ai_usage_limits']) ? $options['ai_usage_limits'] : array();
+        $user_role = $this->get_user_role();
+        $daily_limit = isset($limits[$user_role]) ? $limits[$user_role] : 25;
+        
+        return array(
+            'today' => intval($today_usage),
+            'month' => intval($month_usage),
+            'limit' => intval($daily_limit)
+        );
     }
     
     private function log_usage($action_type) {
         global $wpdb;
         
         $user_id = get_current_user_id();
+        
+        // Check if table exists before trying to insert
+        if ($wpdb->get_var("SHOW TABLES LIKE '{$this->usage_table}'") != $this->usage_table) {
+            return false;
+        }
         
         $wpdb->insert(
             $this->usage_table,
@@ -259,6 +297,8 @@ class WP_AI_Site_Manager_AI {
                 'timestamp' => current_time('mysql')
             )
         );
+        
+        return $wpdb->insert_id > 0;
     }
     
     public static function create_usage_table() {

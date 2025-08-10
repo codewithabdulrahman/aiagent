@@ -40,6 +40,7 @@ register_activation_hook(__FILE__, 'wp_ai_site_manager_activate');
 function wp_ai_site_manager_activate() {
     // Create database tables
     WP_AI_Site_Manager_Monitor::create_tables();
+    WP_AI_Site_Manager_AI::create_usage_table();
     
     // Schedule cron jobs
     if (!wp_next_scheduled('wp_aism_file_scan')) {

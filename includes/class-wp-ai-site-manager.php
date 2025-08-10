@@ -105,9 +105,17 @@ class WP_AI_Site_Manager {
     public function enqueue_admin_assets($hook) {
         if (strpos($hook, 'wp-ai-site-manager') !== false || $hook === 'index.php') {
             wp_enqueue_script(
+                'chart-js',
+                'https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js',
+                array(),
+                '3.9.1',
+                true
+            );
+            
+            wp_enqueue_script(
                 'wp-aism-admin',
                 WP_AISM_PLUGIN_URL . 'assets/js/admin.js',
-                array('jquery'),
+                array('jquery', 'chart-js'),
                 WP_AISM_VERSION,
                 true
             );
@@ -121,7 +129,9 @@ class WP_AI_Site_Manager {
             
             wp_localize_script('wp-aism-admin', 'wpAISM', array(
                 'ajaxUrl' => admin_url('admin-ajax.php'),
+                'adminUrl' => admin_url(),
                 'nonce' => wp_create_nonce('wp_aism_nonce'),
+                'realTimeUpdates' => true,
                 'strings' => array(
                     'loading' => __('Loading...', 'wp-ai-site-manager'),
                     'error' => __('An error occurred', 'wp-ai-site-manager')
