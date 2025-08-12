@@ -8,6 +8,7 @@ class WP_AI_Site_Manager {
     private $ai;
     private $reports;
     private $settings;
+    private $ga4_report;
     
     public function __construct() {
         $this->monitor = new WP_AI_Site_Manager_Monitor();
@@ -86,7 +87,24 @@ class WP_AI_Site_Manager {
             'wp-ai-site-manager-ai',
             array($this->ai, 'render_ai_page')
         );
-    }
+
+        // Add Google Analytics 4 Report submenu
+        require_once dirname(__FILE__) . '/class-wp-ai-site-manager-ga4-report.php';
+        $this->ga4_report = new WP_AI_Site_Manager_GA4_Report();
+        add_submenu_page(
+            'wp-ai-site-manager',
+            __('Report', 'wp-ai-site-manager'),
+            __('Report', 'wp-ai-site-manager'),
+            'manage_options',
+            'wp-ai-site-manager-ga4-report',
+            array($this->ga4_report, 'render_page')
+        );
+        }
+
+    /**
+     * Render GA4 Report Page in admin
+     */
+    
     
     public function add_dashboard_widget() {
         wp_add_dashboard_widget(
@@ -142,7 +160,7 @@ class WP_AI_Site_Manager {
     
     private function add_activity_hooks() {
         // Post actions
-        add_action('save_post', array($this->monitor, 'log_post_action'), 10, 3);
+        add_action('save_post', array($this->   monitor, 'log_post_action'), 10, 3);
         add_action('delete_post', array($this->monitor, 'log_post_deletion'));
         
         // User actions
@@ -156,4 +174,7 @@ class WP_AI_Site_Manager {
         add_action('deactivated_plugin', array($this->monitor, 'log_plugin_deactivation'));
         add_action('switch_theme', array($this->monitor, 'log_theme_change'));
     }
+
+
+    // ...existing code...
 }
