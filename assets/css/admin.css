@@ -600,3 +600,10 @@
         width: 350px;
     }
 }
+
+/* chat-bar */
+
+.dashicons-menu:before {
+    content: "\f333";
+    color: white;
+}
